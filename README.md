@@ -141,6 +141,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-contrib-watch" );
 };
 ```
+*Cartero uses [Grunt](http://gruntjs.com) to run the asset bundler, if you are unfarmilar with Grunt or don't have it installed check out the [getting started guide](http://gruntjs.com/getting-started).*
 
 Lets try out the build task by running:
 ```
@@ -252,7 +253,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-contrib-sass" );
 };
 ```
-Make sure you have Sass installed, if you don't head over to the Sass [installation documentation](http://sass-lang.com/download.html).
+*Make sure you have Sass installed, if you don't head over to the Sass [installation documentation](http://sass-lang.com/download.html).*
 
 Now that the Cartero Grunt task know how to deal with `*.scss` files, lets change `assets/LoginForm/loginForm.css` into `assets/LoginForm/loginForm.scss` and use some Sass in it.
 #### `assets/LoginForm/loginForm.css -> vassets/LoginForm/loginForm.scss`
@@ -267,7 +268,7 @@ Now that the Cartero Grunt task know how to deal with `*.scss` files, lets chang
 ```
 Now run:
 ```
-grunt Cartero && node server.js
+grunt cartero && node server.js
 ```
 and open [http://localhost:7000/](http://localhost:7000/). You can see that the Sass was compiled and included onto the page. 
 
