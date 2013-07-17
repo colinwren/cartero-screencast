@@ -98,7 +98,7 @@ html
       input(type="text")
       button(type="submit") login
 ```
-The bundle comment specifies which bundles should be included in this template. In this case the LoginForm bundle has `loginForm.css` and `loginForm.js` asset files and is dependent on the Form bundle which has the `form.css` file. This will cause those files to be included via `style` and `script` tags wherever the `!{cartero_css}` and `!{cartero_css}` are in the Jade template.
+The bundle comment specifies which bundles should be included in this template. In this case the LoginForm bundle has `loginForm.css` and `loginForm.js` asset files and is dependent on the Form bundle which has the `form.css` file. This will cause those files to be included via `link` and `script` tags wherever the `!{cartero_css}` and `!{cartero_css}` are in the Jade template.
 
 Lets create a Gruntfile to run the Cartero build:
 #### `Gruntfile.js`
@@ -176,7 +176,7 @@ Now that the middleware is hooked up we can run:
 ```
 node server.js
 ```
-and go to [http://localhost:7000/](http://localhost:7000/) to see our homepage with the `login.css`, `login.js` and the `form.css`. We have succesfully included our asset bundles with Cartero! Lets check out some of Cartero's other powerful features.
+and go to [http://localhost:7000/](http://localhost:7000/) to see our homepage with the `loginForm.css`, `loginForm.js` and the `form.css`. We have succesfully included our asset bundles with Cartero! Lets check out some of Cartero's other powerful features.
 
 ### Page specifc assets
 So far our hompage is using the LoginForm bundle (which also pulls in the Form bundle) of assets for the styling of the login form component.  Having these styles in bundles is useful because I can then include the LoginForm bundle on any other page where users can log in on.  Along with the compontent assets, the homepage also has unique assets that don't need to be in a bundle because they are only used on this page.  Lets make some unique hompage styles in `home.css`:
@@ -195,3 +195,5 @@ Now run:
 grunt cartero && node server.js
 ```
 and open [http://localhost:7000/](http://localhost:7000/). You can see that the page specific assets were included alongside the bundled assets.
+## Preprocessors
+## Using Cartero with Bower 
