@@ -94,8 +94,9 @@ html
       input(type="text")
       button(type="submit") login
 ```
+The bundle comment specifies which bundles should be included in this template. In this case the LoginForm bundle has a `loginForm.css` file and it's dependent on the Form bundle which has the `form.css` file. This will cause those files to be included via `style` tags wherever the `!{cartero_css}` variable is.
 
-lets create a Gruntfile to run the Cartero build.
+Lets create a Gruntfile to run the Cartero build:
 #### `Gruntfile.js`
 ```javascript
 module.exports = function( grunt ) {
@@ -167,3 +168,8 @@ app.get( '/', function( req, res ) {
 
 app.listen( '7000' );
 ```
+Now that the middleware is hooked up we can run:
+```
+node server.js
+```
+and go to [http://localhost:7000/](http://localhost:7000/) to see our homepage with both the `login.css` and the `form.css`. We have succesfully included our asset bundles with Cartero! Lets check out some of Cartero's other powerful features.
