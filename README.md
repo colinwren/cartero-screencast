@@ -21,7 +21,6 @@ app.configure( function() {
     app.set( 'views' , path.join( __dirname, 'views' ) );
     app.engine( 'jade', require( 'jade' ).__express );
     app.use( express.static( path.join( __dirname, 'static' ) ) );
-    app.use( carteroMiddleware( __dirname ) );  // install the Cartero Hook
 } );
 
 app.get( '/', function( req, res ) {
@@ -32,3 +31,13 @@ app.get( '/', function( req, res ) {
 
 app.listen( '8000' );
 ```
+And a view at `views/home/home.jade'
+```jade
+h1 My homepage
+```
+Then we can run 
+```
+node app.js
+```
+and open up [http://localhost:7000/](http://localhost:8000/) to see that our jade view has rendered
+## Setting up cartero
