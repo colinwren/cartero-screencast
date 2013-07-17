@@ -16,16 +16,18 @@ And create a basic Express server at `server.js` that uses [Jade](http://jade-la
 var express = require( 'express' );
 var path = require( 'path' );
 var app = express();
+var carteroMiddleware = require( 'cartero-express-hook' );
 
 app.configure( function() {
-    app.set( 'views' , path.join( __dirname, 'views' ) );
-    app.engine( 'jade', require( 'jade' ).__express );
-    app.use( express.static( path.join( __dirname, 'static' ) ) );
+	app.set( 'views' , path.join( __dirname, 'views' ) );
+	app.engine( 'jade', require( 'jade' ).__express );
+	app.use( express.static( path.join( __dirname, 'static' ) ) );
+	app.use( carteroMiddleware( __dirname ) );
 } );
 
 app.get( '/', function( req, res ) {
-    res.render( 'home/home.jade' );
-} );
+	res.render( 'home/home.jade' );
+});
 
 app.listen( '7000' );
 ```
@@ -34,12 +36,12 @@ And a homepage view at `views/home/home.jade'
 ```jade
 doctype
 html
-  head
-  body
-    form.login-form
-      h3 Login
-      input(type="text")
-      button(type="submit") login
+	head
+	body
+		form.login-form
+			h3 Login
+			input(type="text")
+			button(type="submit") login
 ```
 Then we can run 
 ```
@@ -53,16 +55,16 @@ Lets create a `assets/Form/` folder with a `form.css` file for our base form sty
 #### `assets/Form/form.css`
 ```css
 form {
-  border: 1px solid gainsboro;
-  border-radius: 4px;
-  padding: 15px;
+	border: 1px solid gainsboro;
+	border-radius: 4px;
+	padding: 15px;
 }
 ```
 We are going to have a login form module that is used on the home page aswell as other pages.  Our login form has some unique styles but it also uses the base from styles from the `Form` bundle. Lets create a `loginForm.css` file that has the login specific styles, a `login.js` with login specific JavaScript, and a `bundle.json` file to list the `Form` bundle as a dependency.
 #### `assets/LoginForm/loginForm.css`
 ```css
 .login-form {
-    font-size: 1.4em;
+	font-size: 1.4em;
 }
 
 .login-form button {
@@ -77,9 +79,7 @@ alert('Please login!');
 #### `assets/LoginForm/bundle.json`
 ```javascript
 {
-  "dependencies": [
-    "Form"
-  ]
+	"dependencies": [ "Form" ]
 }
 ```
 
@@ -89,14 +89,14 @@ Now that we have created some bundles, lets use them on the homepage. Open up th
 doctype
 // ##cartero_requires "LoginForm"
 html
-  head
-    | !{cartero_js}
-    | !{cartero_css} 
-  body
-    form.login-form
-      h3 Login
-      input(type="text")
-      button(type="submit") login
+	head
+		| !{cartero_js}
+		| !{cartero_css} 
+	body
+		form.login-form
+			h3 Login
+			input(type="text")
+			button(type="submit") login
 ```
 The bundle comment specifies which bundles should be included in this template. In this case the LoginForm bundle has `loginForm.css` and `loginForm.js` asset files and is dependent on the Form bundle which has the `form.css` file. This will cause those files to be included via `link` and `script` tags wherever the `!{cartero_css}` and `!{cartero_css}` are in the Jade template.
 
@@ -104,7 +104,7 @@ Lets create a Gruntfile to run the Cartero build:
 #### `Gruntfile.js`
 ```javascript
 module.exports = function( grunt ) {
-    grunt.initConfig( {
+	grunt.initConfig( {
 
 		cartero : {
 
@@ -123,7 +123,8 @@ module.exports = function( grunt ) {
 
 				publicDir : "static/",
 
-				tmplExt : ".tmpl"
+				tmplExt : ".tmpl",
+
 			},
 
 			dev : {
@@ -167,14 +168,14 @@ var app = express();
 var carteroMiddleware = require( 'cartero-express-hook' );
 
 app.configure( function() {
-    app.set( 'views' , path.join( __dirname, 'views' ) );
-    app.engine( 'jade', require( 'jade' ).__express );
-    app.use( express.static( path.join( __dirname, 'static' ) ) );
-    app.use( carteroMiddleware( __dirname ) );
+	app.set( 'views' , path.join( __dirname, 'views' ) );
+	app.engine( 'jade', require( 'jade' ).__express );
+	app.use( express.static( path.join( __dirname, 'static' ) ) );
+	app.use( carteroMiddleware( __dirname ) );
 } );
 
 app.get( '/', function( req, res ) {
-    res.render( 'home/home.jade' );
+	res.render( 'home/home.jade' );
 });
 
 app.listen( '7000' );
@@ -190,7 +191,7 @@ So far our hompage is using the LoginForm bundle (which also pulls in the Form b
 #### `views/home/home.css`
 ```css
 body {
-    background: hsl(0, 0%, 97%);
+	background: hsl(0, 0%, 97%);
 }
 
 .login-form {
@@ -207,7 +208,7 @@ Asset preprocessors are indespensible tools for front-end web development, Carte
 #### `Gruntfile.js`
 ```javascript
 module.exports = function( grunt ) {
-    grunt.initConfig( {
+	grunt.initConfig( {
 
 		cartero : {
 
@@ -232,7 +233,7 @@ module.exports = function( grunt ) {
 					name : "sass",
 					inExt : ".scss",
 					outExt : ".css"
-				} ],
+				} ]
 
 			},
 
@@ -264,6 +265,10 @@ Now that the Cartero Grunt task know how to deal with `*.scss` files, lets chang
 	}
 }
 ```
-
+Now run:
+```
+grunt Cartero && node server.js
+```
+and open [http://localhost:7000/](http://localhost:7000/). You can see that the Sass was compiled and included onto the page. 
 
 ## Using Cartero with Bower 
