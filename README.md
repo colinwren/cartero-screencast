@@ -16,7 +16,6 @@ And create a basic Express server at `server.js`:
 var express = require( 'express' );
 var path = require( 'path' );
 var app = express();
-var carteroMiddleware = require( 'cartero-express-hook' );
 
 app.configure( function() {
     app.set( 'views' , path.join( __dirname, 'views' ) );
@@ -33,7 +32,14 @@ app.listen( '7000' );
 And a view at `views/home/home.jade'
 #### `views/home/home.jade`
 ```jade
-h1 My homepage
+doctype
+html
+  head
+  body
+    form.login-form
+      h3 Login
+      input(type="text")
+      button(type="submit") login
 ```
 Then we can run 
 ```
@@ -49,6 +55,7 @@ Lets create a `assets/Form/` folder with a `form.css` file for our base form sty
 form {
   border: 1px solid gainsboro;
   border-radius: 4px;
+  padding: 15px;
 }
 ```
 We are going to have a login form module that is used on the home page aswell as other pages.  Our login form has some unique styles but it also uses the base from styles from the `Form` bundle. Lets create a `login.css` file that has the login specific styles and a `bundle.json` file to list the `Form` bundle as a dependency.
@@ -58,7 +65,7 @@ We are going to have a login form module that is used on the home page aswell as
   font-size: 1.4em;
 }
 
-.login-submit {
+.login-form button {
   color: white;
   background: green;
 }
@@ -75,8 +82,18 @@ We are going to have a login form module that is used on the home page aswell as
 Now that we have created some bundles, lets use them on the homepage. Open up the home view and add the cartero bundle comment:
 #### `views/home/home.jade`
 ```jade
-// ##cartero_requires "loginForm"
-h1 My homepage
+doctype
+// ##cartero_requires "LoginForm"
+html
+  head
+    | !{cartero_js}
+    | !{cartero_css} 
+  body
+    form.login-form
+      h3 Login
+      input(type="text")
+      button(type="submit") login
+
 ```
 
 lets create a Gruntfile to run the Cartero build.
@@ -89,7 +106,7 @@ module.exports = function( grunt ) {
                 projectDir : __dirname,      // the root directory of your project. All other paths 
                                              // in these options are relative to this directory.
                 library : {
-                    path : "assetLibrary/"   // the relative path to your Asset Library directory.
+                    path : "assets/"   // the relative path to your Asset Library directory.
                 },
                 views : {
                     path : "views/",         // the directoy containing your server side templates.
@@ -103,14 +120,8 @@ module.exports = function( grunt ) {
             },
 
             // `dev` target uses all the default options.
-            dev : {},
-
-            // `prod` target overrides the `mode` option.
-            prod : {
-                options : {
-                    mode : "prod"
-                }
-            }
+            dev : {}
+            
         }
     } );
 
