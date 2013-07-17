@@ -1,7 +1,7 @@
 # Cartero Screen Cast Outline
 ## Intro
 
-> Cartero is a client side asset managment tool that enables users to have a modular front-end architecture. I am going to demo Cartero setup and workflow with a simple express server.
+Cartero is a client side asset managment tool that enables users to have a modular front-end architecture. I am going to demo Cartero setup and workflow with a simple express server.
 
 ## Install dependencies and create Express server
 First lets install all our dependencies with:
@@ -41,12 +41,45 @@ node server.js
 ```
 and open up [http://localhost:7000/](http://localhost:7000/) to see that our jade view has rendered
 ## Setting up cartero
-Now that we have express serving up views lets get it working with cartero. First lets create some asset bundles that we want included in our `home.jade` template. First create an `assets` folder in the root of your project and then lets create two bundles, a `Forms` bundle with all of your form base styles and a `SignUpForm` bundle with styles and scripts specifically for your Sign up form.
+Now that we have express serving up views lets get it working with cartero. First lets create some asset bundles that we want included in our `home.jade` template. First create an `assets` folder in the root of your project and then lets create two bundles, a `Forms` bundle with all of your form base styles and a `LoginForm` bundle with styles and scripts specifically for your Sign up form.
 
+Lets create a `assets/Form/` folder with a `form.css` file for our base form styles:
+#### `assets/Form/form.css`
+```css
+form {
+  border: 1px solid gainsboro;
+  border-radius: 4px;
+}
+```
+We are going to have a login form module that is used on the home page aswell as other pages.  Our login form has some unique styles but it also uses the base from styles from the `Form` bundle. Lets create a `login.css` file that has the login specific styles and a `bundle.json` file to list the `Form` bundle as a dependency.
+#### `assets/LoginForm/login.css`
+```css
+.login-form {
+  font-size: 1.4em;
+}
 
+.login-submit {
+  color: white;
+  background: green;
+}
+```
+#### `assets/LoginForm/bundle.json`
+```javascript
+{
+  "dependencies": [
+    "Form"
+  ]
+}
+```
 
+Now that we have created some bundles, lets use them on the homepage. Open up the home view and add the cartero bundle comment:
+#### `views/home/home.jade`
+```jade
+// ##cartero_requires "loginForm"
+h1 My homepage
+```
 
-Now that we have some bundles set up lets create a Gruntfile to run the Cartero build.
+lets create a Gruntfile to run the Cartero build.
 #### `Gruntfile.js`
 ```javascript
 module.exports = function( grunt ) {
@@ -85,3 +118,9 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( "grunt-contrib-watch" ); // for `--watch` flag
 };
 ```
+
+Lets try out the build task by running:
+```
+grunt cartero
+```
+
