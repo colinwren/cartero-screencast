@@ -7,7 +7,7 @@ Cartero is a client side asset managment tool that enables users to have a modul
 First lets install all our dependencies with:
 
 ```
-npm install express cartero cartero-express-hook jade grunt grunt-contrib-watch
+npm install express cartero cartero-express-hook jade grunt grunt-contrib-watch grunt-contrib-sass
 ```
 
 And create a basic Express server at `server.js` that uses [Jade](http://jade-lang.com/) for views:
@@ -62,12 +62,12 @@ We are going to have a login form module that is used on the home page aswell as
 #### `assets/LoginForm/loginForm.css`
 ```css
 .login-form {
-  font-size: 1.4em;
+    font-size: 1.4em;
 }
 
 .login-form button {
-  color: white;
-  background: green;
+	color: white;
+	background: green;
 }
 ```
 #### `assets/LoginForm/loginForm.js`
@@ -105,32 +105,39 @@ Lets create a Gruntfile to run the Cartero build:
 ```javascript
 module.exports = function( grunt ) {
     grunt.initConfig( {
-        cartero : {
-            options : {
-                projectDir : __dirname,      // the root directory of your project. All other paths 
-                                             // in these options are relative to this directory.
-                library : {
-                    path : "assets/"   // the relative path to your Asset Library directory.
-                },
-                views : {
-                    path : "views/",         // the directoy containing your server side templates.
-                    viewFileExt : ".jade"    // the file extension of your server side templates.
-                },
-                publicDir : "static/",       // your app's "public" or "static" directory (into
-                                             // which processed assets will ultimately be dumped).
 
-                tmplExt : ".tmpl",           // the file extension(s) of your client side template.
-                mode : "dev"                 // "dev" or "prod"
-            },
+		cartero : {
 
-            // `dev` target uses all the default options.
-            dev : {}
-            
-        }
-    } );
+			options : {
 
-    grunt.loadNpmTasks( "cartero" );
-    grunt.loadNpmTasks( "grunt-contrib-watch" ); // for `--watch` flag
+				projectDir : __dirname,
+
+				library : {
+					path : "assets/"
+				},
+
+				views : {
+					path : "views/",
+					viewFileExt : ".jade"
+				},
+
+				publicDir : "static/",
+
+				tmplExt : ".tmpl"
+			},
+
+			dev : {
+				options : {
+					mode : "dev"
+				}
+
+			}
+
+		}
+	} );
+
+	grunt.loadNpmTasks( "cartero" );
+	grunt.loadNpmTasks( "grunt-contrib-watch" );
 };
 ```
 
@@ -183,11 +190,11 @@ So far our hompage is using the LoginForm bundle (which also pulls in the Form b
 #### `views/home/home.css`
 ```css
 body {
-  background: hsl(0, 0%, 97%);
+    background: hsl(0, 0%, 97%);
 }
 
-form {
-  background: white;
+.login-form {
+	background: white;
 }
 ```
 Now run:
@@ -196,4 +203,67 @@ grunt cartero && node server.js
 ```
 and open [http://localhost:7000/](http://localhost:7000/). You can see that the page specific assets were included alongside the bundled assets.
 ## Preprocessors
+Asset preprocessors are indespensible tools for front-end web development, Cartero makes it trivial to use which ever preprocessors you like. Lets edit the `Gruntfile.js` to configure the Cartero Grunt task to work with [Sass](http://sass-lang.com/):
+#### `Gruntfile.js`
+```javascript
+module.exports = function( grunt ) {
+    grunt.initConfig( {
+
+		cartero : {
+
+			options : {
+
+				projectDir : __dirname,
+
+				library : {
+					path : "assets/"
+				},
+
+				views : {
+					path : "views/",
+					viewFileExt : ".jade"
+				},
+
+				publicDir : "static/",
+
+				tmplExt : ".tmpl",
+
+				preprocessingTasks : [ {
+					name : "sass",
+					inExt : ".scss",
+					outExt : ".css"
+				} ],
+
+			},
+
+			dev : {
+				options : {
+					mode : "dev"
+				}
+
+			}
+
+		}
+	} );
+
+	grunt.loadNpmTasks( "cartero" );
+	grunt.loadNpmTasks( "grunt-contrib-watch" );
+	grunt.loadNpmTasks( "grunt-contrib-sass" );
+};
+```
+Make sure you have Sass installed, if you don't head over to the Sass [installation documentation](http://sass-lang.com/download.html).
+
+Now that the Cartero Grunt task know how to deal with `*.scss` files, lets change `assets/LoginForm/loginForm.css` into `assets/LoginForm/loginForm.scss` and use some Sass in it.
+#### `assets/LoginForm/loginForm.css -> vassets/LoginForm/loginForm.scss`
+```scss
+.login-form {
+    font-size: 1.4em;
+	button {
+		color: white;
+		background: green;
+	}
+}
+```
+
+
 ## Using Cartero with Bower 
