@@ -4,7 +4,7 @@
 Cartero is a client side asset managment tool that enables users to have a modular front-end architecture. I am going to walk through the setup and workflow of using Cartero with an [Express.js](http://expressjs.com/) server.
 
 ## Install dependencies and create Express server
-First, lets a new folder for our project and install all our dependencies with npm:
+First, lets a create new folder for our project and install all our dependencies with npm:
 
 ```
 npm install express cartero cartero-express-hook jade grunt grunt-contrib-watch grunt-contrib-sass
