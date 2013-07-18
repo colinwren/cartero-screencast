@@ -88,13 +88,13 @@ Now that we have created some bundles, lets use them on the homepage. Open up th
 doctype
 html
 	head
-		| !{cartero_js}
 		| !{cartero_css} 
 	body
 		form.login-form
 			h3 Login
 			input(type="text")
 			button(type="submit") login
+		| !{cartero_js}
 ```
 The bundle comment specifies which bundles should be included in this template. In this case, the LoginForm bundle has `loginForm.css` and `loginForm.js` asset files and is dependent on the Form bundle which has the `form.css` file. This will cause those files to be included via `link` and `script` tags wherever the `!{cartero_css}` and `!{cartero_js}` are in the Jade template.
 
@@ -354,13 +354,13 @@ Now lets require the Ember bundle in our `home.jade`:
 doctype
 html
 	head
-		| !{cartero_js}
 		| !{cartero_css} 
 	body
 		form.login-form
 			h3 Login
 			input(type="text")
 			button(type="submit") login
+		| !{cartero_js}
 ```
 and run:
 ```
