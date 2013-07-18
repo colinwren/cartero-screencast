@@ -47,7 +47,7 @@ node server.js
 ```
 and open up [http://localhost:7000/](http://localhost:7000/) to see that our Jade view has been rendered and served.
 ## Setting up Cartero
-Now that we have Express serving up views lets get it working with Cartero. First, we will create some asset bundles that we want included in our `home.jade` template. Lets create an `assets` folder in the root of your project with two bundles, a `Form` bundle with all of your form base styles and a `LoginForm` bundle with styles and scripts specifically for our login form.
+Now that we have Express serving up views, lets get it working with Cartero. First, we will create some asset bundles that we want included in our `home.jade` template. Lets create an `assets` folder in the root of our project with two bundles, a `Form` bundle with all of our base form styles and a `LoginForm` bundle with styles and scripts specific to our login form.
 
 Lets create a `assets/Form/` folder with a `form.css` file for our base form styles:
 #### `assets/Form/form.css`
@@ -58,7 +58,7 @@ form {
 	padding: 15px;
 }
 ```
-We are going to have a login form module that is used on the home page aswell as other pages.  Our login form has some unique styles but it also uses the base from styles from the `Form` bundle. Lets create a `loginForm.css` file that has the login specific styles, a `login.js` with login specific JavaScript, and a `bundle.json` file to list the `Form` bundle as a dependency.
+We are going to have a login form module that is used on the home page aswell as other pages.  Our login form has some unique styles but it also uses the base from styles from the `Form` bundle. Lets create a `loginForm.css` file that has the login specific styles, a `loginForm.js` with login specific JavaScript, and a `bundle.json` file to list the `Form` bundle as a dependency.
 #### `assets/LoginForm/loginForm.css`
 ```css
 .login-form {
@@ -84,8 +84,8 @@ alert('Please login!');
 Now that we have created some bundles, lets use them on the homepage. Open up the home view and add the Cartero bundle comment:
 #### `views/home/home.jade`
 ```jade
-doctype
 // ##cartero_requires "LoginForm"
+doctype
 html
 	head
 		| !{cartero_js}
@@ -349,9 +349,9 @@ module.exports = function( grunt ) {
 ```
 Now lets require the Ember bundle in our `home.jade`:
 #### `views/home/home.jade`
-```javascript
-doctype
+```jade
 // ##cartero_requires "LoginForm", "ember"
+doctype
 html
 	head
 		| !{cartero_js}
