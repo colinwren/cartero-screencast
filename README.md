@@ -273,3 +273,99 @@ grunt cartero && node server.js
 and open [http://localhost:7000/](http://localhost:7000/). You can see that the Sass was compiled and included onto the page.  This same process can be used for CoffeeScript or other CSS preprocessors.
 
 ## Using Cartero with Bower 
+_If you are unfarmiliar with Bower or don't have it installed, check out the [Bower docs](http://bower.io/)._
+Bower makes it really east to manage third party libraries and their dependencies. Bower components can be used a Cartero bundles and their dependencies in `bower.json` are automatically resolved by Cartero.
+
+Lets get started by installing [Ember.js](http://emberjs.com/):
+```
+bower install ember
+```
+Ember and its dependencies (jQuery, and Handlebars) are now installed, lets get them accessable as Cartero bundles. Unlike the Cartero bundles, the Bower compontents have files that we dont want included such as tests and minified versions. Because of this we need to make a `bowerBundleProperties.json` file to tell Cartero which files we want.
+#### `bowerBundleProperties.json`
+```javascript
+{
+	"Bower/ember" : {
+		"whitelistedFiles" : [ "ember.js" ]
+	},
+	"Bower/jquery" : {
+		"whitelistedFiles" : [ "jquery.js" ]
+	},
+	"Bower/handlebars" : {
+		"whitelistedFiles" : [ "handlebars.js" ]
+	}
+}
+```
+
+Then we need to edit the Cartero Grunt task config to use the `bower_components` as a source for bundles:
+#### `Gruntfile.js`
+```javascript
+module.exports = function( grunt ) {
+	grunt.initConfig( {
+
+		cartero : {
+
+			options : {
+
+				projectDir : __dirname,
+
+				library : [
+					{
+						path : "assets/"
+					},
+					{
+						path : "bower_components/",
+						bundleProperties : grunt.file.readJSON( "bowerBundleProperties.json" )
+					}],
+
+				views : {
+					path : "views/",
+					viewFileExt : ".jade"
+				},
+
+				publicDir : "static/",
+
+				tmplExt : ".tmpl",
+
+				preprocessingTasks : [ {
+					name : "sass",
+					inExt : ".scss",
+					outExt : ".css"
+				} ],
+
+			},
+
+			dev : {
+				options : {
+					mode : "dev"
+				}
+
+			}
+
+		}
+	} );
+
+	grunt.loadNpmTasks( "cartero" );
+	grunt.loadNpmTasks( "grunt-contrib-watch" );
+	grunt.loadNpmTasks( "grunt-contrib-sass" );
+};
+```
+Now lets include the Ember bundle in our `home.jade`:
+#### `views/home/home.jade`
+```javascript
+doctype
+// ##cartero_requires "LoginForm", "ember"
+html
+	head
+		| !{cartero_js}
+		| !{cartero_css} 
+	body
+		form.login-form
+			h3 Login
+			input(type="text")
+			button(type="submit") login
+```
+and run:
+```
+grunt cartero && node server.js
+```
+When we open [http://localhost:7000/](http://localhost:7000/), we can see that Ember and all of its dependencies were included onto the homepage.
