@@ -16,13 +16,11 @@ And create a basic Express server at `server.js` that uses [Jade](http://jade-la
 var express = require( 'express' );
 var path = require( 'path' );
 var app = express();
-var carteroMiddleware = require( 'cartero-express-hook' );
 
 app.configure( function() {
 	app.set( 'views' , path.join( __dirname, 'views' ) );
 	app.engine( 'jade', require( 'jade' ).__express );
 	app.use( express.static( path.join( __dirname, 'static' ) ) );
-	app.use( carteroMiddleware( __dirname ) );
 } );
 
 app.get( '/', function( req, res ) {
