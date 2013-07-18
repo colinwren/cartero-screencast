@@ -282,13 +282,13 @@ Ember and its dependencies (jQuery, and Handlebars) are now installed, lets get 
 #### `bowerBundleProperties.json`
 ```javascript
 {
-	"Bower/ember" : {
+	"ember" : {
 		"whitelistedFiles" : [ "ember.js" ]
 	},
-	"Bower/jquery" : {
+	"jquery" : {
 		"whitelistedFiles" : [ "jquery.js" ]
 	},
-	"Bower/handlebars" : {
+	"handlebars" : {
 		"whitelistedFiles" : [ "handlebars.js" ]
 	}
 }
