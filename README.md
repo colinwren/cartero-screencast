@@ -187,7 +187,7 @@ node server.js
 ```
 and go to [http://localhost:7000/](http://localhost:7000/) to see our homepage with the `loginForm.css`, `loginForm.js` and the `form.css`. We have succesfully included our asset bundles with Cartero! Lets check out some of Cartero's other powerful features.
 
-### Page specifc assets
+## Page specifc assets
 So far our hompage is using the LoginForm bundle (which also pulls in the Form bundle) of assets for the styling of the login form component.  Having these styles in bundles is useful because I can then include the LoginForm bundle on any other page where users can log in on.  Along with the compontent assets, the homepage also has unique assets that don't need to be in a bundle because they are only used on this page.  Lets make some unique hompage styles in `home.css`:
 #### `views/home/home.css`
 ```css
@@ -270,6 +270,6 @@ Now run:
 ```
 grunt cartero && node server.js
 ```
-and open [http://localhost:7000/](http://localhost:7000/). You can see that the Sass was compiled and included onto the page. 
+and open [http://localhost:7000/](http://localhost:7000/). You can see that the Sass was compiled and included onto the page.  This same process can be used for CoffeeScript or other CSS preprocessors.
 
 ## Using Cartero with Bower 
