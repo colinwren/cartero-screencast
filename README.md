@@ -46,7 +46,7 @@ node server.js
 ```
 and open up [http://localhost:7000/](http://localhost:7000/) to see that our Jade homepage view has been rendered and served.
 ## Creating asset bundles
-Now that we have Express serving up views, lets get it working with Cartero. First, we will create some asset bundles that we want included in our `home.jade` template. Lets create an `assets` folder in the root of our project with two bundles, a `Form` bundle with all of our base form styles and a `LoginForm` bundle with styles and scripts specific to our login form.
+Now that we have Express set up, lets get it working with Cartero. First, we will create some asset bundles to be included in our `home.jade` template. Lets create an `assets` folder in the root of our project with two bundles, a `Form` bundle with all of our base form styles and a `LoginForm` bundle with styles and scripts specific to our login form.
 
 Lets create a `assets/Form/` folder with a `form.css` file for our base form styles:
 #### `assets/Form/form.css`
