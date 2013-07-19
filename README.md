@@ -311,7 +311,8 @@ module.exports = function( grunt ) {
 					{
 						path : "bower_components/",
 						bundleProperties : grunt.file.readJSON( "bowerBundleProperties.json" )
-					}],
+					}
+				],
 
 				views : {
 					path : "views/",
