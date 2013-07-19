@@ -17,7 +17,7 @@ var express = require( 'express' );
 var app = express();
 
 app.configure( function() {
-	app.set( 'views' , path.join( 'views' );
+	app.set( 'views' , 'views' );
 	app.engine( 'jade', require( 'jade' ).__express );
 	app.use( express.static( 'static' ) );
 } );
@@ -167,7 +167,7 @@ var carteroMiddleware = require( 'cartero-express-hook' );
 app.configure( function() {
 	app.set( 'views' , 'views' );
 	app.engine( 'jade', require( 'jade' ).__express );
-	app.use( express.static( path.join( 'static' ) );
+	app.use( express.static( 'static' );
 	app.use( carteroMiddleware( __dirname ) );
 } );
 
