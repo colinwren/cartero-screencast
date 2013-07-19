@@ -14,13 +14,12 @@ Now we can create a simple Express server at `server.js` that uses the [Jade](ht
 #### `server.js`
 ```javascript
 var express = require( 'express' );
-var path = require( 'path' );
 var app = express();
 
 app.configure( function() {
-	app.set( 'views' , path.join( __dirname, 'views' ) );
+	app.set( 'views' , path.join( 'views' );
 	app.engine( 'jade', require( 'jade' ).__express );
-	app.use( express.static( path.join( __dirname, 'static' ) ) );
+	app.use( express.static( 'static' ) );
 } );
 
 app.get( '/', function( req, res ) {
@@ -162,14 +161,13 @@ Now that we have our bundles and build task setup, we can use [Cartero Express h
 #### `server.js`
 ```javascript
 var express = require( 'express' );
-var path = require( 'path' );
 var app = express();
 var carteroMiddleware = require( 'cartero-express-hook' );
 
 app.configure( function() {
-	app.set( 'views' , path.join( __dirname, 'views' ) );
+	app.set( 'views' , 'views' );
 	app.engine( 'jade', require( 'jade' ).__express );
-	app.use( express.static( path.join( __dirname, 'static' ) ) );
+	app.use( express.static( path.join( 'static' ) );
 	app.use( carteroMiddleware( __dirname ) );
 } );
 
