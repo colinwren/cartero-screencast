@@ -1,16 +1,16 @@
 # Cartero Screen Cast Outline
 ## Intro
 
-Cartero is a client side asset managment tool that enables users to have a modular front-end architecture. I am going to walk through the setup and workflow of using Cartero with an [Express.js](http://expressjs.com/) server.
+In this screencast, I am going to walk through the setup and workflow of using the Cartero client side asset managment tool with an [Express.js](http://expressjs.com/) server.
 
 ## Install dependencies and create Express server
-First, lets a create new folder for our project and install all our dependencies with npm:
+First off, lets a create new folder for our project called `myApp` and install all our dependencies with npm:
 
 ```
 npm install express cartero cartero-express-hook jade grunt grunt-contrib-watch grunt-contrib-sass
 ```
 
-Now we can create a simple Express server at `server.js` that uses the [Jade](http://jade-lang.com/) for views:
+Now we can create a simple Express server at `server.js` that uses the [Jade](http://jade-lang.com/) template engine for view rendering:
 #### `server.js`
 ```javascript
 var express = require( 'express' );
@@ -44,7 +44,7 @@ node server.js
 ```
 and open up [http://localhost:7000/](http://localhost:7000/) to see that our Jade homepage view has been rendered and served.
 ## Creating asset bundles
-Now that we have Express set up, lets get it working with Cartero. First, we will create some asset bundles to be included in our `home.jade` template. Lets create an `assets` folder in the root of our project with two bundles, a `Form` bundle with all of our base form styles and a `LoginForm` bundle with styles and scripts specific to our login form.
+Now that we have Express set up, lets get it working with Cartero. First, we will create some asset bundles to be included in our `home.jade` template. Lets create an `assets` folder in the root of our project with two bundles. Our first bundle will be `Form`, this will contain some generic styles that we want used on forms throughout our app.
 
 Lets create a `assets/Form/` folder with a `form.css` file for our base form styles:
 #### `assets/Form/form.css`
@@ -55,7 +55,8 @@ form {
 	padding: 15px;
 }
 ```
-We are going to create a login form module that is used on the home page aswell as other pages.  Our login form has some unique styles but it also uses the base from styles from the `Form` bundle. Lets create a `loginForm.css` file that has the login specific styles, a `loginForm.js` with login specific JavaScript, and a `bundle.json` file to list the `Form` bundle as a dependency.
+ We also want to include a `LoginForm` on our homepage so lets create a `loginForm` bundle, and our `loginForm` bundle has some styling specific to the `loginForm` so well make a `loginForm.css`:
+
 #### `assets/LoginForm/loginForm.css`
 ```css
 .login-form {
@@ -67,10 +68,12 @@ We are going to create a login form module that is used on the home page aswell 
 	background: green;
 }
 ```
+ We also want a little bit of JavaScript wherever there are login forms so well create a `loginFrom.js`:
 #### `assets/LoginForm/loginForm.js`
 ```javascript
 alert('Please login!');
 ```
+Now on any page we want the `LoginForm` bundle we also want the `Form` CSS so lets list the `Form` bundle as a dependency of the `LoginForm` bundle in a `bundle.json` file:
 #### `assets/LoginForm/bundle.json`
 ```javascript
 {
