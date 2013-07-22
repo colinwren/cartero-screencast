@@ -16,11 +16,9 @@ Now we can create a simple Express server at `server.js` that uses the [Jade](ht
 var express = require( 'express' );
 var app = express();
 
-app.configure( function() {
-	app.set( 'views' , 'views' );
-	app.engine( 'jade', require( 'jade' ).__express );
-	app.use( express.static( 'static' ) );
-} );
+app.set( 'views' , 'views' );
+app.engine( 'jade', require( 'jade' ).__express );
+app.use( express.static( 'static' ) );
 
 app.get( '/', function( req, res ) {
 	res.render( 'home/home.jade' );
@@ -164,12 +162,10 @@ var express = require( 'express' );
 var app = express();
 var carteroMiddleware = require( 'cartero-express-hook' );
 
-app.configure( function() {
-	app.set( 'views' , 'views' );
-	app.engine( 'jade', require( 'jade' ).__express );
-	app.use( express.static( 'static' );
-	app.use( carteroMiddleware( __dirname ) );
-} );
+app.set( 'views' , 'views' );
+app.engine( 'jade', require( 'jade' ).__express );
+app.use( express.static( 'static' );
+app.use( carteroMiddleware( __dirname ) );
 
 app.get( '/', function( req, res ) {
 	res.render( 'home/home.jade' );
