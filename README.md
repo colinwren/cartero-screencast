@@ -86,7 +86,7 @@ module.exports = function( grunt ) {
 
 				publicDir : "static/",
 
-				tmplExt : ".tmpl",
+				tmplExt : ".tmpl"
 
 			},
 
