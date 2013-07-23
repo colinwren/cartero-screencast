@@ -46,7 +46,7 @@ node server.js
 ```
 and open up [http://localhost:7000/](http://localhost:7000/) to see that our homepage view has been rendered and served.
 ## Page specifc assets
-Let`s add some styles to our homepage by creating a `home.css`:
+Let's add some styles to our homepage by creating a `home.css` alongside our `home.jade` in the `views/home` folder:
 #### `views/home/home.css`
 ```css
 body {
@@ -57,7 +57,7 @@ body {
 	background: white;
 }
 ```
-We will also create an `assets/` folder that to be used later to store reuseable asset bundles.
+We will also create an `assets/` folder that we will use later to store reuseable asset bundles.
 ```
 mkdir assets
 ```
