@@ -61,23 +61,8 @@ We will also create an `assets/` folder that we will use later to store reuseabl
 ```
 mkdir assets
 ```
-
+Let's get the Cartero build working so we can start seeing out assets included on our homepage.
 ## Cartero build setup
-Now that we have created a `home.css`, let's get it included on the homepage. First, we need to add variables to our `home.jade` template that get replaced by the `script` and `link` tags of our assets during rendering:
-#### `views/home/home.jade`
-```jade
-doctype
-html
-	head
-		| !{cartero_css} 
-	body
-		form.login-form
-			h3 Login
-			input(type="text")
-			button(type="submit") login
-		| !{cartero_js}
-```
-
 Then let's create a Gruntfile to run the Cartero build task:
 #### `Gruntfile.js`
 ```javascript
@@ -154,7 +139,23 @@ app.get( '/', function( req, res ) {
 
 app.listen( '7000' );
 ```
-Now that the middleware is hooked up we can run:
+
+Lastly, we'll add variables to our `home.jade` template that get replaced by the `script` and `link` tags of our assets during rendering:
+#### `views/home/home.jade`
+```jade
+doctype
+html
+	head
+		| !{cartero_css} 
+	body
+		form.login-form
+			h3 Login
+			input(type="text")
+			button(type="submit") login
+		| !{cartero_js}
+```
+
+Now that the middleware is hooked up and our template is ready we can run:
 ```
 node server.js
 ```
