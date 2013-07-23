@@ -62,7 +62,7 @@ We will also create an `assets/` folder that we will use later to store reuseabl
 mkdir assets
 ```
 
-## Setting up Cartero build
+## Cartero build setup
 Now that we have created a `home.css`, let's get it included on the homepage. First, we need to add variables to our `home.jade` template that get replaced by the `script` and `link` tags of our assets during rendering:
 #### `views/home/home.jade`
 ```jade
@@ -202,7 +202,7 @@ node server.js
 ```
 and opening [http://localhost:7000/](http://localhost:7000/)
 
-
+# Cartero production mode
 ## Using Cartero with Bower 
 _If you are unfarmiliar with Bower or don't have it installed, check out the [Bower docs](http://bower.io/)._
 Bower makes it easy to manage third party libraries and their dependencies. Bower components can be used as Cartero bundles and their dependencies in `bower.json` are automatically resolved by Cartero.
@@ -256,13 +256,7 @@ module.exports = function( grunt ) {
 
 				publicDir : "static/",
 
-				tmplExt : ".tmpl",
-
-				preprocessingTasks : [ {
-					name : "sass",
-					inExt : ".scss",
-					outExt : ".css"
-				} ],
+				tmplExt : ".tmpl"
 
 			},
 
