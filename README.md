@@ -46,11 +46,11 @@ node server.js
 ```
 and open up [http://localhost:7000/](http://localhost:7000/) to see that our homepage view has been rendered and served.
 ## Page specifc assets
-Lets add some styles to our homepage by creating a `home.css`:
+Let`s add some styles to our homepage by creating a `home.css`:
 #### `views/home/home.css`
 ```css
 body {
-	background: hsl(0, 0%, 97%);
+	background: gainsboro;
 }
 
 .login-form {
@@ -166,7 +166,7 @@ Lets create a `assets/Form/` folder with a `form.css` file for our base form sty
 #### `assets/Form/form.css`
 ```css
 form {
-	border: 1px solid gainsboro;
+	border: 1px solid grey;
 	border-radius: 4px;
 	padding: 15px;
 }
