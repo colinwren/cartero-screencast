@@ -5,7 +5,7 @@ In this screencast, I am going to walk through the setup and workflow of using C
 
 We'll create a simple Express server and a homepage for our app. Then we will setup Cartero and use it to add JS and CSS to our homepage.
 
-## Install dependencies and create Express server
+## Express server
 First off, let's install all of our project's dependencies with npm:
 
 ```
