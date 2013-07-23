@@ -218,7 +218,11 @@ node server.js
 ```
 and opening [http://localhost:7000/](http://localhost:7000/)
 
-# Cartero production mode
+## Production mode
+Now that we've seen how easy it is to include assets in our Jade views with Cartero, lets check out how Cartero helps us prepare out assets for production. Let's start by taking a look at the source of our homepage.
+
+Lets see how it is different after when we run the cartero grunt task in production mode instead.
+
 ## Using Cartero with Bower 
 _If you are unfarmiliar with Bower or don't have it installed, check out the [Bower docs](http://bower.io/)._
 Bower makes it easy to manage third party libraries and their dependencies. Bower components can be used as Cartero bundles and their dependencies in `bower.json` are automatically resolved by Cartero.
