@@ -197,7 +197,22 @@ On any page we use the assets from our __LoginForm__ bundle, we also want the as
 	"dependencies": [ "Form" ]
 }
 ```
-Lets checkout our homepage with the new bundled assets included by running:
+Lastly, we need to list the bunldes we want included in our `home.jade` template:
+#### `views/home/home.jade`
+```jade
+// ##cartero_requires "LoginForm"
+doctype
+html
+	head
+		| !{cartero_css} 
+	body
+		form.login-form
+			h3 Login
+			input(type="text")
+			button(type="submit") login
+		| !{cartero_js}
+```
+Now we can checkout our homepage with the new bundled assets included by running:
 ```
 node server.js
 ```
