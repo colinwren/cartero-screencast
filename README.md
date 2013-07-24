@@ -151,7 +151,7 @@ and open [http://localhost:7000/](http://localhost:7000/) to see that our homepa
 ## Creating asset bundles
 First, we will create some asset bundles to be included in our `home.jade` template. We'll create two bundles inside an `assets` folder. Our first bundle will be __Form__, this will contain some generic styles that we want used on forms throughout our app.
 
-Lets create a `assets/Form/` folder with a `form.css` file for our base form styles:
+Lets create a `assets/Form` folder with a `form.css` file for our base form styles:
 #### `assets/Form/form.css`
 ```css
 form {
@@ -300,9 +300,7 @@ module.exports = function( grunt ) {
 					viewFileExt : ".jade"
 				},
 
-				publicDir : "static/",
-
-				tmplExt : ".tmpl"
+				publicDir : "static/"
 
 			},
 
