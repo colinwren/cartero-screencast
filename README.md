@@ -46,7 +46,7 @@ node server.js
 ```
 and open up [http://localhost:7000/](http://localhost:7000/) to see that our homepage view has been rendered and served.
 ## Page specifc assets
-Let's add some styles to our homepage. Instead of creating directories like `styles` and `scripts` to store all of our assets, we'll put the homepage specific assets alongside the homepage view. Let's create `home.css` alongside our `home.jade` in the `views/home` folder:
+Let's add some styles to our homepage. Usually we would store our homepage CSS in a `styles` folder, but wouldn't it be better to store all of our hompage assets alongside the `home.jade`? Cartero allow us to drop any JS, CSS, or client side templates into the `home` folder and they will be automatically included on the homepage. Let's create a `home.css` alongside our `home.jade` in the `views/home` folder:
 #### `views/home/home.css`
 ```css
 body {
@@ -143,7 +143,7 @@ html
 		| !{cartero_js}
 ```
 
-Now that the middleware is hooked up and our template is ready we can run:
+Now we'll run:
 ```
 node server.js
 ```
@@ -257,7 +257,7 @@ Let's get started by installing [Ember.js](http://emberjs.com/):
 ```
 bower install ember
 ```
-Ember and its dependencies (jQuery, and Handlebars) are now installed, let's get them accessable as Cartero bundles. Unlike the Cartero bundles, the Bower compontents have files that we dont want included such as tests and minified versions. Because of this we need a `bowerBundleProperties.json` file to tell Cartero which files we want.
+Now that Ember and its dependencies (jQuery, and Handlebars) are installed, let's get them accessable as Cartero bundles. Unlike our asset bundles, the Bower compontents have files that we dont want included in our views such as tests and minified versions. Because of this we need a `bowerBundleProperties.json` file to tell Cartero which files we want. In this file, we can set any options that we would in a `bundle.json`, this comes in handy when you want to configure a bundle's properties but don't want to modify its contents. 
 #### `bowerBundleProperties.json`
 ```javascript
 {
