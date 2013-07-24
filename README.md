@@ -58,7 +58,7 @@ body {
 }
 ```
 ## Cartero build setup
-Then let's setup the Cartero build task by creating a Gruntfile:
+Now we'll create Gruntfile so we can setup the Cartero build task:
 #### `Gruntfile.js`
 ```javascript
 module.exports = function( grunt ) {
