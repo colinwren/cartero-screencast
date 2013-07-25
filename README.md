@@ -243,7 +243,7 @@ Now we can checkout our homepage with the new bundled assets included by running
 node server.js
 ```
 and opening [http://localhost:7000/](http://localhost:7000/)
-
+So just with this single login form comment we have pulled in all the assets from the login form bundle, and from the form bundle via its dependency. I could include the same `cartero_requires` comment on any view and these bundles would be pulled in just the same. Having the ability to create reuseable bundles of JS, CSS, and client side templates is very helpful when building modular applications.
 ## Production mode
 Now that we've seen how easy it is to include assets in our Jade views with Cartero, lets check out how Cartero helps us prepare out assets for production. Let's start by taking a look at the source of our homepage.
 
