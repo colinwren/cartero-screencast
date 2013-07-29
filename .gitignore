@@ -10,5 +10,10 @@ lib-cov
 pids
 logs
 results
+static
+
+cartero.json
 
 npm-debug.log
+node_modules
+.sass-cache

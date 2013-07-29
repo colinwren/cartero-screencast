@@ -1,0 +1,11 @@
+// ##cartero_requires "LoginForm"
+doctype
+html
+	head
+		| !{cartero_css} 
+	body
+		form.login-form
+			h3 Login
+			input(type="text")
+			button(type="submit") login
+		| !{cartero_js}
