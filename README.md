@@ -1,4 +1,13 @@
-# Cartero Screen Cast Outline
+# Cartero screencast
+This repo contains the completed Cartero demo app, grab all the dependencies with:
+```
+npm install
+```
+To use the cartero build task and start the express server run:
+```
+grunt cartero && node server.js
+```
+# Screencast script
 ## Intro
 
 In this screencast, I am going to walk through the setup and workflow of using Cartero with an [Express.js](http://expressjs.com/) server. Cartero is a powerful client side asset managment tool that enables developers to create reusable asset bundles and store page specific assets alongside their corresponding views.
